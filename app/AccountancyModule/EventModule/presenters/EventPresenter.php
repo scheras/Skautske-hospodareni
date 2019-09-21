@@ -108,6 +108,7 @@ class EventPresenter extends BasePresenter
 
     public function renderLogs(int $aid) : void
     {
+        $this->setLayout('layout.new');
         $this->template->setParameters([
             'logs' => $this->loggerService->findAllByTypeId(Type::get(Type::OBJECT), $aid),
         ]);
