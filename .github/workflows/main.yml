@@ -53,8 +53,6 @@ jobs:
     tests-integrations:
         name: "Run integration tests"
         runs-on: ubuntu-18.04
-        container:
-            image: fmasa/lebeda:7.4
         needs: workdir
         steps:
             - name: Download workdir
@@ -204,3 +202,12 @@ jobs:
             - run: mv app/config/config.ci.local.neon app/config/config.local.neon
             - run: php www/index.php migrations:migrate --no-interaction
             - run: "! php www/index.php migrations:diff && php www/index.php migrations:diff --allow-empty-diff"
+
+
+    deploy:
+        needs: [workdir, tests-unit, tests-integration, tests-acceptance, static-analysis, coding-standard, latte-link]
+        runs-on: ubuntu-18.04
+        image: fmasa/lebeda:7.3-ci
+        steps:
+            - name: Add www.skauting.cz to known hosts
+              run: ssh-keyscan -H www.skauting.cz >> ~/.ssh/known_hosts
