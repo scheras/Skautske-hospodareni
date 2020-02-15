@@ -205,20 +205,26 @@ jobs:
 
 
     deploy:
-        needs: [workdir, tests-unit, tests-integration, tests-acceptance, static-analysis, coding-standard, latte-lint]
+        name: "Deploy to test-h.skauting.cz"
+        needs: [workdir]
         runs-on: ubuntu-18.04
+        container:
+            image: fmasa/lebeda:7.3
         steps:
             - name: Download workdir
               uses: actions/download-artifact@v1
               with:
                   name: workdir
                   path: .
+            - name: Extract workdir
+              run: tar -xzpf workdir.tar.gz
             - name: Deploy to test
-              uses: ./.github/actions/deploy
+              run: ./.github/workflows/deploy.sh
               env:
                   ENVIRONMENT: test
                   ROOT_DIR: /home/vu009010
-                  SSH_USER: vu009010
+                  SSH_USERNAME: vu009010
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
                   CONFIG_DATABASE_PASSWORD: ${{ secrets.CONFIG_TEST_DATABASE_PASSWORD }}
                   CONFIG_SKAUTIS_APPLICATION_ID: ${{ secrets.CONFIG_TEST_SKAUTIS_APPLICATION_ID }}
 #                  CONFIG_SENTRY_DSN: null
