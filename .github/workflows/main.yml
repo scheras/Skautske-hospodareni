@@ -50,7 +50,7 @@ jobs:
               run: tar -xzpf workdir.tar.gz
             - run: phing tests-unit
 
-    tests-integrations:
+    tests-integration:
         name: "Run integration tests"
         runs-on: ubuntu-18.04
         needs: workdir
@@ -205,9 +205,20 @@ jobs:
 
 
     deploy:
-        needs: [workdir, tests-unit, tests-integration, tests-acceptance, static-analysis, coding-standard, latte-link]
+        needs: [workdir, tests-unit, tests-integration, tests-acceptance, static-analysis, coding-standard, latte-lint]
         runs-on: ubuntu-18.04
-        image: fmasa/lebeda:7.3-ci
         steps:
-            - name: Add www.skauting.cz to known hosts
-              run: ssh-keyscan -H www.skauting.cz >> ~/.ssh/known_hosts
+            - name: Download workdir
+              uses: actions/download-artifact@v1
+              with:
+                  name: workdir
+                  path: .
+            - name: Deploy to test
+              uses: ./.github/actions/deploy
+              env:
+                  ENVIRONMENT: test
+                  ROOT_DIR: /home/vu009010
+                  SSH_USER: vu009010
+                  CONFIG_DATABASE_PASSWORD: ${{ secrets.CONFIG_TEST_DATABASE_PASSWORD }}
+                  CONFIG_SKAUTIS_APPLICATION_ID: ${{ secrets.CONFIG_TEST_SKAUTIS_APPLICATION_ID }}
+#                  CONFIG_SENTRY_DSN: null
