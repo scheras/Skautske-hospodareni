@@ -218,13 +218,18 @@ jobs:
                   path: .
             - name: Extract workdir
               run: tar -xzpf workdir.tar.gz
+            - name: Start ssh agent
+              uses: webfactory/ssh-agent@v0.2.0
+              with:
+                  ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+            - name: Add www.skauting.cz to known hosts
+              run: mv .github/workflows/known_hosts ~/.ssh/known_hosts
             - name: Deploy to test
-              run: ./.github/workflows/deploy.sh
+              run: phing deploy
               env:
                   ENVIRONMENT: test
                   ROOT_DIR: /home/vu009010
                   SSH_USERNAME: vu009010
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
                   CONFIG_DATABASE_PASSWORD: ${{ secrets.CONFIG_TEST_DATABASE_PASSWORD }}
                   CONFIG_SKAUTIS_APPLICATION_ID: ${{ secrets.CONFIG_TEST_SKAUTIS_APPLICATION_ID }}
 #                  CONFIG_SENTRY_DSN: null
