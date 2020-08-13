@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b538316029c2798cd665ef78cb8b0de7",
+    "content-hash": "4d42e66c46b81739eccea7f3bbb9a306",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -7421,52 +7421,6 @@
             "time": "2019-01-16T14:22:17+00:00"
         },
         {
-            "name": "captbaritone/mailcatcher-codeception-module",
-            "version": "2.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/captbaritone/codeception-mailcatcher-module.git",
-                "reference": "a2c1ed7cbd279fee6505a4366fc630a2f34f6f57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/captbaritone/codeception-mailcatcher-module/zipball/a2c1ed7cbd279fee6505a4366fc630a2f34f6f57",
-                "reference": "a2c1ed7cbd279fee6505a4366fc630a2f34f6f57",
-                "shasum": ""
-            },
-            "require": {
-                "codeception/codeception": "^2.2 || ^3.0 || ^4.0",
-                "guzzlehttp/guzzle": "^6.0",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "codeception/module-asserts": "^1.1",
-                "phpmailer/phpmailer": "^5.2"
-            },
-            "suggest": {
-                "codeception/module-asserts": "Required if using Codeception >= 4.0",
-                "php-mime-mail-parser/php-mime-mail-parser": "^2.9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Codeception\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jordan Eldredge",
-                    "email": "jordan@jordaneldredge.com"
-                }
-            ],
-            "description": "Test emails in your Codeception acceptance tests",
-            "time": "2020-01-10T15:50:25+00:00"
-        },
-        {
             "name": "codeception/codeception",
             "version": "3.1.2",
             "source": {
@@ -9544,6 +9498,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
