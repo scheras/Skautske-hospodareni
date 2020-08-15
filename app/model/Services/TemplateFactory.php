@@ -10,7 +10,6 @@ use Nette\Bridges\ApplicationLatte\Template;
 
 class TemplateFactory
 {
-    public const OAUTH_ADDED     = __DIR__ . '/../emails/oAuthAdded.latte';
     public const PAYMENT_DETAILS = __DIR__ . '/../emails/payment.base.latte';
 
     /** @var ILatteFactory */

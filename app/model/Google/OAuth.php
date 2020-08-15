@@ -39,18 +39,18 @@ class OAuth extends Aggregate
     /** @ORM\Column(type="datetime_immutable") */
     private DateTimeImmutable $updatedAt;
 
-    private function __construct(OAuthId $id, UnitId $unitId, string $code, string $email, DateTimeImmutable $updatedAt)
+    private function __construct(OAuthId $id, UnitId $unitId, string $token, string $email, DateTimeImmutable $updatedAt)
     {
         $this->id        = $id;
         $this->unitId    = $unitId;
-        $this->token     = $code;
+        $this->token     = $token;
         $this->email     = $email;
         $this->updatedAt = $updatedAt;
     }
 
-    public static function create(UnitId $unitId, string $code, string $email) : self
+    public static function create(UnitId $unitId, string $token, string $email) : self
     {
-        return new self(OAuthId::generate(), $unitId, $code, $email, new DateTimeImmutable());
+        return new self(OAuthId::generate(), $unitId, $token, $email, new DateTimeImmutable());
     }
 
     public function setToken(string $token) : void

@@ -20,7 +20,6 @@ use Nette\SmartObject;
  * @property-read int|NULL $constantSymbol
  * @property-read VariableSymbol|NULL $nextVariableSymbol
  * @property-read string $state
- * @property-read string|NULL $oAuthId
  * @property-read string $note
  */
 class Group
@@ -157,9 +156,9 @@ class Group
         return $this->state;
     }
 
-    public function getOAuthId() : ?OAuthId
+    public function getOAuthId() : ?string
     {
-        return $this->oAuthId;
+        return $this->oAuthId !== null ? $this->oAuthId->toString() : null;
     }
 
     public function getNote() : string

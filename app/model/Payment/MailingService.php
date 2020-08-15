@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Model\Common\Repositories\IUserRepository;
 use Model\Common\UserNotFound;
 use Model\Google\Exception\OAuthNotFound;
+use Model\Google\Exception\OAuthNotSet;
 use Model\Google\InvalidOAuth;
 use Model\Mail\IMailerFactory;
 use Model\Mail\Repositories\IGoogleRepository;
@@ -145,11 +146,14 @@ class MailingService
      * @throws InvalidBankAccount
      * @throws BankAccountNotFound
      * @throws UserNotFound
+     * @throws InvalidOAuth
+     * @throws OAuthNotSet
+     * @throws OAuthNotFound
      */
     private function send(Group $group, MailPayment $payment, EmailTemplate $emailTemplate) : void
     {
         if ($group->getOauthId() === null) {
-            throw new OAuthNotFound();
+            throw new OAuthNotSet();
         }
 
         $user = $this->users->getCurrentUser();
